@@ -1,19 +1,19 @@
-function Emojis(sad, happy, m) {
+function Emojis(sad, happy, mouthType) {
 	this.x=0;
 	this.y=0;
 	this.sadCol=sad;
 	this.happyCol=happy;
-	this.mouth=m;
+	this.mouth=mouthType;
 
 	this.updatePos=function(xPos,yPos) {
 		this.x=xPos;
 		this.y=yPos
 	}
 
-	this.changeExpression=function(c, m) {
+	/*this.changeExpression=function(c, m) {
 		this.color=c;
 		this.mouth=m;
-	}
+	}*/
 
 	this.display=function() {
 		if (mouseIsPressed) {
@@ -21,6 +21,7 @@ function Emojis(sad, happy, m) {
 		} else {
 			fill(this.sadCol);
 		}
+
         ellipse(this.x, this.y, 45, 45);    //face
         fill(50);    //grey
         ellipse(this.x-10,this.y-5,5,5);    //left eye

@@ -3,17 +3,17 @@ function Bowties(c, strokeC) {
 	this.y=0;
 	this.col=c;
 	this.strokeCol=strokeC;
-	this.dots=false;
+	/*this.dots=false;
 	this.dotsCol=color(255);
 	this.stripes=false;
-	this.stripesCol=color(255);
+	this.stripesCol=color(255);*/
 
 	this.updatePos=function(xPos,yPos) {
 		this.x=xPos;
 		this.y=yPos
 	}
 
-	this.dotsSwitch=function(c) {
+	/*this.dotsSwitch=function(c) {
 		this.dotsCol=c;
 		this.dots=!this.dots;
 	}
@@ -21,6 +21,11 @@ function Bowties(c, strokeC) {
 	this.stripesSwitch=function(c) {
 		this.stripesCol=c;
 		this.stripes=!this.stripes;
+	}
+*/	
+	//had to create blank function because couldn't check whether objects were an instance of DottedBowties or StripedBowties in the main code
+	this.switch=function() {
+
 	}
 
 	this.display=function() {
@@ -31,7 +36,7 @@ function Bowties(c, strokeC) {
         triangle(this.x, this.y, this.x+20, this.y-10, this.x+20, this.y+10);    //right half
         rect(this.x, this.y, 10, 10, 3);    //thing in middle of bowtie
 
-        if(this.dots) {
+        /*if(this.dots) {
         	noStroke();
             fill(this.dotsCol);    //green
             //middle dots
@@ -57,6 +62,6 @@ function Bowties(c, strokeC) {
             //bottom stripes
             line(this.x-19,this.y+5,this.x-11,this.y+5);
             line(this.x+19,this.y+5,this.x+11,this.y+5);
-        }
+        }*/
 	}
 }

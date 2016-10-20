@@ -14,13 +14,23 @@ function setup() {    //use function instead of void
   text("1: Chevron (click to add a color to the pattern)",250,80);
   text("2: Hearts",250,110);
   text("3: Sparkles (move your mouse around to change the colors)",250,140);
-  text("4: Bowties (press 'space' or click to give the bowties patterns)",250,170);
+  text("4: Bowties (click to reveal hidden patterns)",250,170);
   text("5: Poles",250,200);
-  text("6: Emojis (click to change make the emojis smile!)",250,230);
+  text("6: Emojis (click to make the emojis happy)",250,230);
   text("ENJOY! c:",250,260);
 
   for (var i=0; i<bowties.length; i++) {
-    bowties[i]=new Bowties(color(255,185,100),color(175,70,0));
+    r=int(random(3));
+    if (r==0) {
+      bowties[i]=new Bowties(color(255,185,100),color(175,70,0));
+      //console.log("norm");
+    } else if (r==1) {
+      bowties[i]=new DottedBowties(color(255,185,100),color(175,70,0),color(20,145,0));
+      //console.log("dots");
+    } else if (r==2) {
+      bowties[i]=new StripedBowties(color(255,185,100),color(175,70,0),color(20,80,170));
+      //console.log("stripes");
+    }
   }
 
   for (var j=0; j<normalEmojis.length; j++) {
@@ -130,37 +140,37 @@ function draw() {
 
   //BOWTIES
   if (choice==4) {
+    //console.log("BEGIN");
     frameRate(60);
     strokeWeight(1);
     rectMode(CENTER);
     background(240,255,235);    //light green background
+    var i=0;
     for (var x=50; x<width-25; x+=50) {
       if (x<=250) {
-        var i=0;
         for (var y=x; y<=(height-x); y+=25) {
           bowties[i].updatePos(x,y);
           bowties[i].display();
+          //console.log(i);
           i++;
         }
       } else {
         for (var y=x; y>=(height-x); y-=25) {
           bowties[i].updatePos(x,y);
           bowties[i].display();
+          //console.log(i);
           i++;
         }
       }
     }
     //user can give the bowties patterns
-    if (mouseIsPressed) {    //gives dots when mouse is clicked
-      for (var i=0; i<bowties.length; i++) {
-        bowties[i].dotsSwitch(color(20,145,0));
-      }
-    } else if (keyIsPressed) {    //gives stripes when spacebar is pressed
-      if (key==' ') {
-        for (var i=0; i<bowties.length; i++) {
-          bowties[i].stripesSwitch(color(20,145,0));
-          //bowties[i].display();
-        }
+    if (mouseIsPressed) {
+      for (var j=0; j<bowties.length; j++) {
+        //if(bowties[j].constructor===DottedBowties || bowties[j].constructor===StripedBowties) {
+          //console.log(j);
+          bowties[j].switch();
+          bowties[j].display();
+        //}
       }
     }
   }
@@ -234,5 +244,8 @@ function keyPressed() {
   } else if (key == '6') {
     background(255);
     choice=6;
+  }
+  if (key==' ') {
+    noLoop();
   }
 }
